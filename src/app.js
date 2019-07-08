@@ -4,6 +4,8 @@ import express from 'express';
 import jsend from 'jsend';
 import morgan from 'morgan';
 
+import v1Router from './routes';
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,7 +14,9 @@ app.use(cookieParser());
 app.use(morgan('combined'));
 app.use(jsend.middleware);
 
-app.get('*', (req, res) => res.jsend.success('Project started'));
+app.use('/api/v1', v1Router);
+
+app.get('*', (req, res) => res.jsend.success('Invana!!!'));
 
 const port = parseInt(process.env.PORT, 10) || 4000;
 
