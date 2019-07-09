@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
