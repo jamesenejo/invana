@@ -40,5 +40,14 @@ export default {
       });
     }
     return next();
+  },
+  checkInventoryParams: (req, res, next) => {
+    const { params: { inventoryId } } = req;
+    const parsedNumber = parseInt(inventoryId, 10);
+    const isInter = Number.isInteger(parsedNumber);
+    const isGreaterThanZero = parsedNumber > 0;
+  
+    if (isInter && isGreaterThanZero) return next();
+    return res.jsend.error('Inventory ID must be an integer greater than zero');
   }
 };
