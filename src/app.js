@@ -1,10 +1,13 @@
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
 import express from 'express';
 import jsend from 'jsend';
 import morgan from 'morgan';
 
 import v1Router from './routes';
+
+dotenv.config();
 
 const app = express();
 
