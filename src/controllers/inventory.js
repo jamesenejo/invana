@@ -3,7 +3,7 @@ import models from '../models';
 const { Inventory } = models;
 
 export default {
-  create: async (req, res) => {
+  create: (req, res) => {
     const { body: { category, name, description }, user: { userId } } = req;
 
     const inventory = {
@@ -14,8 +14,13 @@ export default {
       userId
     };
 
-    // persist user to database
+    // persist inventory to database
     Inventory.create(inventory);
     return res.jsend.success(inventory);
+  },
+  findAll: (req, res) => {
+    const { user: { userId } } = req;
+    const listOfInventory = Inventory.findAll(userId);
+    return res.jsend.success(listOfInventory);
   }
 };
