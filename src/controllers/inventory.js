@@ -22,5 +22,14 @@ export default {
     const { user: { userId } } = req;
     const listOfInventory = Inventory.findAll(userId);
     return res.jsend.success(listOfInventory);
+  },
+  findOne: (req, res) => {
+    const { params: { inventoryId }, user: { userId } } = req;
+    const inventory = Inventory.findOne(+inventoryId);
+
+    if (!inventory) return res.jsend.error('Inventory does not exist');
+    if (inventory.userId !== userId) return res.jsend.error('You cannot access this inventory');
+
+    return res.jsend.success(inventory);
   }
 };

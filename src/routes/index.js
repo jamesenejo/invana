@@ -18,4 +18,9 @@ router.post('/inventory', authenticator, validator.inventory, inventory.create);
 // Get all inventory
 router.get('/inventory', authenticator, inventory.findAll);
 
+// Get an inventory
+router.get(
+  '/inventory/:inventoryId', authenticator, validator.checkInventoryParams, inventory.findOne
+);
+
 export default router;
