@@ -1,5 +1,5 @@
 import validationHelpers from '../utilities/validationHelpers';
-import { emailRegex, passwordRegex } from '../utilities/regexen';
+import { emailRegex, passwordRegex, descriptionRegex } from '../utilities/regexen';
 
 const { checkForEmptyFields, checkPatternedFields } = validationHelpers;
 
@@ -17,6 +17,21 @@ export default {
     errors.push(...checkPatternedFields('Email address', email, emailRegex));
     errors.push(...checkPatternedFields('Password', password, passwordRegex));
 
+    if (errors.length) {
+      return res.jsend.error({
+        message: 'Your request contain errors',
+        data: errors
+      });
+    }
+    return next();
+  },
+  inventory: (req, res, next) => {
+    const errors = [];
+    const { category, name, description } = req.body;
+    
+    errors.push(...checkForEmptyFields('Category', category));
+    errors.push(...checkForEmptyFields('Name', name));
+    errors.push(...checkPatternedFields('Description', description, descriptionRegex));
 
     if (errors.length) {
       return res.jsend.error({
