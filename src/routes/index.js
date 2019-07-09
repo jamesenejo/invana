@@ -15,4 +15,7 @@ router.post('/login', validator.auth, users.login);
 // Create inventory
 router.post('/inventory', authenticator, validator.inventory, inventory.create);
 
+// Get all inventory
+router.get('/inventory', authenticator, inventory.findAll);
+
 export default router;
